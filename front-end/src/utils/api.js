@@ -58,7 +58,8 @@ async function fetchJson(url, options, onCancel) {
  *  a promise that resolves to a possibly empty array of reservation saved in the database.
  */
 
-export async function listReservations(params, signal) {
+ export async function listReservations(params, signal) {
+  //console.log(params);
   const url = new URL(`${API_BASE_URL}/reservations`);
   Object.entries(params).forEach(([key, value]) =>
     url.searchParams.append(key, value.toString())
@@ -69,6 +70,7 @@ export async function listReservations(params, signal) {
 }
 
 export async function retrieveAllReservations(signal) {
+  console.log("Retrieving all reservations . . .")
   const url = `${API_BASE_URL}/reservations`;
   return await fetchJson(url, { signal }, []);
 }

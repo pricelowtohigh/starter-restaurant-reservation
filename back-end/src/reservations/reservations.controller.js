@@ -1,20 +1,15 @@
-const asyncErrorBoundary = require("../errors/asyncErrorBoundary");
 const reservationsService = require("./reservations.service");
+const asyncErrorBoundary = require("../errors/asyncErrorBoundary");
 
-/**
- * List handler for reservation resources
- */
+// VALIDATION MIDDLEWARES //
 
- function bodyDataHas(propertyName) {
+function bodyDataHas(propertyName) {
   return function (req, res, next) {
     const { data = {} } = req.body;
     if (data[propertyName]) {
       return next();
     }
-    next({
-      status: 400,
-      message: `Must include a ${propertyName}`,
-    });
+    next({ status: 400, message: `Must include a ${propertyName}` });
   };
 }
 
@@ -46,12 +41,12 @@ function reservationTimePropertyIsValid(req, res, next) {
 
 function peoplePropertyIsValid(req, res, next) {
   const { people } = req.body.data;
-  if (typeof people === "number" && people > 0) {
+  if (typeof people === "number") {
     return next();
   } else {
     return next({
       status: 400,
-      message: `Invalid field: 'people' must be at least 1.`,
+      message: `Invalid field: 'people' must be a positive integer greater than 0.`,
     });
   }
 }
@@ -78,30 +73,14 @@ function reservationIsForFuture(req, res, next) {
   } else {
     return next({
       status: 400,
-      message: `Sorry! Reservations must be for a future time or date.`,
-    });
+      message: `Sorry! Reservations must be for a future time or date.`
+    })
   }
 }
 
-function reservationIsForOpenHours(req, res, next) {
-  const { reservation_time } = req.body.data;
-  if (reservation_time >= "10:30" && reservation_time <= "21:30") {
-    return next();
-  } else {
-    return next({
-      status: 400,
-      message: `Sorry! Reservations are only available from 10:30am to 9:30pm.`,
-    });
-  }
-}
+// HTTP REQUEST HANDLERS FOR 'RESERVATIONS' RESOURCES //
 
- async function create(req, res) {
-  const newReservation = req.body.data;
-  const responseData = await reservationsService.create(newReservation);
-  res.status(201).json({ data: responseData });
-}
-
- async function list(req, res) {
+async function list(req, res) {
   const { date } = req.query;
   if (date) {
     const responseData = await reservationsService.list(date);
@@ -113,8 +92,16 @@ function reservationIsForOpenHours(req, res, next) {
   }
 }
 
+async function create(req, res) {
+  const newReservation = req.body.data;
+  const responseData = await reservationsService.create(newReservation);
+  res.status(201).json({ data: responseData });
+}
+
+// EXPORTS //
+
 module.exports = {
-  list: asyncErrorBoundary(list),
+  list: [asyncErrorBoundary(list)],
   create: [
     bodyDataHas("first_name"),
     bodyDataHas("last_name"),
@@ -127,7 +114,6 @@ module.exports = {
     peoplePropertyIsValid,
     reservationIsNotForTuesday,
     reservationIsForFuture,
-    reservationIsForOpenHours,
     asyncErrorBoundary(create),
-  ]
+  ],
 };

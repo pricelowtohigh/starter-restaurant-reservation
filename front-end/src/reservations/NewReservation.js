@@ -14,19 +14,27 @@ function Reservations() {
     mobile_number: "",
     reservation_date: "",
     reservation_time: "",
-    people: "",
+    people: 0,
   }
 
   const [reservationData, setReservationData] = useState({...initialFormState});
   const [errors, setErrors] = useState(null);
   
-  const handleChange = ({target}) => {
-    setReservationData({
-      ...reservationData,
-      [target.id]: target.value
-    })
-    console.log(reservationData)
-  }
+  const handleChange = (event) => {
+    event.preventDefault();
+    if (event.target.name !== "people") {
+      setReservationData({
+        ...reservationData,
+        [event.target.name]: event.target.value,
+      });
+    } else {
+      setReservationData({
+        ...reservationData,
+        people: parseInt(event.target.value),
+      });
+    }
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -44,7 +52,8 @@ function Reservations() {
     return (
         <main>
           <h1>New Reservation</h1>
-          <form name="new-reservation" id="reservation" onSubmit={handleSubmit}>
+          <ErrorAlert error={errors} />
+          <form name="reservation" id="reservation" onSubmit={handleSubmit}>
             <table>
               <tr>
                 <td>
@@ -54,6 +63,7 @@ function Reservations() {
                   type="text"
                   placeholder="First Name"
                   form="reservation"
+                  required={true}
                   onChange={handleChange}
                   value={reservationData.first_name}
                 />
@@ -67,6 +77,7 @@ function Reservations() {
                   type="text"
                   placeholder="Last Name"
                   form="reservation"
+                  required={true}
                   onChange={handleChange}
                   value={reservationData.last_name}
                 />
@@ -77,9 +88,10 @@ function Reservations() {
                   <input 
                     id="mobile_number"
                     name="mobile_number"
-                    type="number"
+                    type="tel"
                     placeholder="Mobile Number"
                     form="reservation"
+                    required={true}
                     onChange={handleChange}
                     value={reservationData.mobile_number}
                   />
@@ -93,6 +105,7 @@ function Reservations() {
                     type="date"
                     placeholder="Date of Reservation"
                     form="reservation"
+                    required={true}
                     onChange={handleChange}
                     value={reservationData.reservation_date}
                   />
@@ -106,6 +119,7 @@ function Reservations() {
                     type="time"
                     placeholder="Time of Reservation"
                     form="reservation"
+                    required={true}
                     onChange={handleChange}
                     value={reservationData.reservation_time}
                   />
@@ -118,7 +132,9 @@ function Reservations() {
                     name="people"
                     type="number"
                     placeholder="Number of People"
+                    min="1"
                     form="reservation"
+                    required={true}
                     onChange={handleChange}
                     value={reservationData.people}
                   />

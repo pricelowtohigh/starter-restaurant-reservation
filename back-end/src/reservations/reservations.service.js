@@ -2,13 +2,6 @@ const knex = require("../db/connection");
 
 // CRUDL SERVICES FOR 'RESERVATIONS' RESOURCES //
 
-function create(newReservation) {
-    return knex("reservations")
-      .insert(newReservation)
-      .returning("*")
-      .then((createdRecord) => createdRecord[0]);
-  }
-
 function list(date) {
   if (date) {
     return knex("reservations")
@@ -20,9 +13,14 @@ function list(date) {
   }
 }
 
-// EXPORTS //
+function create(newReservation) {
+  return knex("reservations")
+    .insert(newReservation)
+    .returning("*")
+    .then((createdRecord) => createdRecord[0]);
+}
 
 module.exports = {
-    create,
-    list,
+  list,
+  create,
 };

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { listReservations } from "../utils/api";
 import ReservationList from "./ReservationList";
 import ErrorAlert from "../layout/ErrorAlert";
-import { retrieveAllReservations } from "../utils/api";
+//import { retrieveAllReservations } from "../utils/api";
 import { useHistory } from "react-router";
 import useQuery from "../utils/useQuery";
 import { today, previous, next } from "../utils/date-time";
@@ -15,7 +15,7 @@ import { today, previous, next } from "../utils/date-time";
  */
 function Dashboard({ date }) {
   const [reservations, setReservations] = useState([]);
-  const [reservationList, setReservationList] = useState([]);
+  //const [reservationList, setReservationList] = useState([]);
   const [reservationsError, setReservationsError] = useState(null);
   const history = useHistory();
   const query = useQuery();
@@ -24,21 +24,20 @@ function Dashboard({ date }) {
 
   useEffect(loadDashboard, [date]);
 
-  useEffect(() => {
+  /*useEffect(() => {
     const abortController = new AbortController();
     retrieveAllReservations(abortController.signal)
         .then(setReservationList)
         .then(console.log("reservationsasdasd: ", reservations))
     console.log(reservationList)
     return () => abortController.abort()
-  },[])
+  },[date])*/
 
   function loadDashboard() {
     const abortController = new AbortController();
     setReservationsError(null);
     listReservations({ date }, abortController.signal)
       .then(setReservations)
-      //.then(console.log("reservations: ", reservations))
       .catch(setReservationsError)
       
     return () => abortController.abort();
@@ -76,6 +75,7 @@ function Dashboard({ date }) {
 
         </div>
         <ReservationList reservations={reservations} />
+        {JSON.stringify(reservations)}
         
     </main>
   );

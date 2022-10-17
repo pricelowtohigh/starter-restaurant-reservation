@@ -6,7 +6,7 @@ function ReservationList ({reservations}) {
 
     const list = reservations.map((reservation, index) => {
         return (
-            <tr>
+            <tr key={index}>
                 <td style={{padding: "10px"}}>{reservation.first_name}</td>
                 <td style={{padding: "10px"}}>{reservation.last_name}</td>
                 <td style={{padding: "10px"}}>{reservation.mobile_number}</td>
