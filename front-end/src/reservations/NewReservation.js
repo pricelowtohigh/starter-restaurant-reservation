@@ -140,24 +140,17 @@ function Reservations() {
                   />
                 </td>
               </tr>
-              <tr>
-                <td>
-                  <input 
-                    id="submit"
-                    name="submit"
-                    type="submit"
-                    form="reservation"
-                  />
-                  <input
-                    id="cancel"
-                    name="cancel"
-                    type="button"
-                    value="Cancel"
-                    onClick={() => history.goBack()}
-                  />
-                </td>
-              </tr>
             </table>
+            <button
+              type="btn btn-danger"
+              className="btn btn-danger"
+              onClick={() => history.goBack()}
+            >
+              Cancel
+            </button>
+            <button type="submit" className="btn btn-primary">
+              Submit
+            </button>
           </form>
         </main>
     )
