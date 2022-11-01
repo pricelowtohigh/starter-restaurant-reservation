@@ -1,6 +1,9 @@
 {
   "name": "starter-restaurant-reservation",
   "version": "1.0.0",
+  "engines": {
+    "node": "18.x"
+  },
   "description": "Starter project restaurant reservation system",
   "private": true,
   "repository": {
@@ -9,6 +12,7 @@
   },
   "scripts": {
     "build": "npm -prefix front-end run build",
+    "build:vercel": "build --output public",
     "preinstall": "cd ./back-end && npm install",
     "install": "cd ./front-end && npm install",
     "start": "npx concurrently 'npm run start:backend' 'npm run start:frontend'",
