@@ -8,6 +8,7 @@ import React from "react";
  * @returns {JSX.Element}
  */
 function NotFound() {
+  console.log("'Not Found' front end error. Unmatched route encountered.")
   return (
     <div className="NotFound">
       <h1>Not Found</h1>
