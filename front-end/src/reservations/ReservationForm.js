@@ -8,7 +8,7 @@ export default function ReservationForm({
   existingReservation,
   editMode = false,
 }) {
-  const URL = process.env.API_BASE_URL + "/reservations";
+  const URL = process.env.REACT_APP_API_BASE_URL + "/reservations";
   const history = useHistory();
 
   const intialFormState = {
