@@ -5,7 +5,7 @@ import TableOptions from "../tables/TableOptions";
 import ErrorAlert from "../layout/ErrorAlert";
 
 export default function SeatReservation() {
-  const URL = process.env.REACT_APP_API_BASE_URL;
+  const URL = `https://restaurant-reservation-backend-muq2.onrender.com`;
   const history = useHistory();
   const { reservation_id } = useParams();
   const [tables, setTables] = useState([]);
