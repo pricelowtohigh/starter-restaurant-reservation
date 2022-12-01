@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import axios from "axios";
 
 export default function ReservationCard({ reservation }) {
-  const URL = `https://restaurant-reservation-backend-muq2.onrender.com`;
+  const URL = process.env.API_BASE_URL;
   const history = useHistory();
 
   const handleCancelClick = async (event) => {

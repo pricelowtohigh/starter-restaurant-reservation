@@ -8,7 +8,7 @@ export default function ReservationForm({
   existingReservation,
   editMode = false,
 }) {
-  const URL = `https://restaurant-reservation-backend-muq2.onrender.com` + "/reservations";
+  const URL = process.env.API_BASE_URL + "/reservations";
   const history = useHistory();
 
   const intialFormState = {

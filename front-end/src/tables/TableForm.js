@@ -32,7 +32,7 @@ export default function TableForm() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      await axios.post(`https://restaurant-reservation-backend-muq2.onrender.com` + `/tables`, {
+      await axios.post(process.env.API_BASE_URL + `/tables`, {
         data: formData,
       });
       history.push(`/dashboard`);

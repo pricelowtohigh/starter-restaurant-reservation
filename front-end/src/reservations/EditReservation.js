@@ -6,7 +6,7 @@ import ErrorAlert from "../layout/ErrorAlert";
 import { formatAsDate } from "../utils/date-time";
 
 export default function EditReservation() {
-  const URL = `https://restaurant-reservation-backend-muq2.onrender.com`;
+  const URL = process.env.API_BASE_URL;
   const { reservation_id } = useParams();
   const [existingReservation, setExistingReservation] = useState(null);
   const [errors, setErrors] = useState(null);
