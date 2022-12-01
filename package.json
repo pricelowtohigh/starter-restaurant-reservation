@@ -2,7 +2,7 @@
   "name": "starter-restaurant-reservation",
   "version": "1.0.0",
   "engines": {
-    "node": "18.x"
+    "node": "16"
   },
   "description": "Starter project restaurant reservation system",
   "private": true,
