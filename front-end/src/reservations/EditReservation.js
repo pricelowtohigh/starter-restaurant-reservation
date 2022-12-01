@@ -17,13 +17,20 @@ export default function EditReservation() {
       .get(`${URL}/reservations/${reservation_id}`, {
         signal: abortController.signal,
       })
+      .then((res) => {
+        console.log(res);
+        return res;
+      })
       .then((response) =>
         setExistingReservation({
           ...response.data.data,
           reservation_date: formatAsDate(response.data.data.reservation_date),
         })
       )
-      .catch(setErrors);
+      .catch(setErrors)
+      .then(() => {
+        console.log(errors)
+      })
     return () => abortController.abort();
   }, [URL, reservation_id]);
 
