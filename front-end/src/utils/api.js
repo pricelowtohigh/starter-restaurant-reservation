@@ -12,7 +12,7 @@ const API_BASE_URL =
  * Defines the default headers for these functions to work with `json-server`
  */
 const headers = new Headers();
-headers.append("Content-Type", "application/json", );
+headers.append("Content-Type", "application/json");
 headers.append("Access-Control-Allow-Origin", "*");
 headers.append("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,PATCH,OPTIONS")
 
