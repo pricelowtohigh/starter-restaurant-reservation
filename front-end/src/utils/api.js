@@ -12,7 +12,9 @@ const API_BASE_URL =
  * Defines the default headers for these functions to work with `json-server`
  */
 const headers = new Headers();
-headers.append("Content-Type", "application/json");
+headers.append("Content-Type", "application/json", );
+headers.append("Access-Control-Allow-Origin", "*");
+headers.append("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,PATCH,OPTIONS")
 
 /**
  * Fetch `json` from the specified URL and handle error status codes and ignore `AbortError`s
@@ -31,7 +33,7 @@ headers.append("Content-Type", "application/json");
  */
 async function fetchJson(url, options, onCancel) {
   try {
-    const response = await fetch(url,{mode: 'no-cors'}, options);
+    const response = await fetch(url, options);
 
     if (response.status === 204) {
       return null;
