@@ -6,15 +6,13 @@ import axios from "axios";
  * The default values is overridden by the `API_BASE_URL` environment variable.
  */
 const API_BASE_URL =
-  process.env.REACT_APP_API_BASE_URL || "https://restaurant-reservation-backend-muq2.onrender.com";
+  process.env.REACT_APP_API_BASE_URL || "http://localhost:5001";
 
 /**
  * Defines the default headers for these functions to work with `json-server`
  */
 const headers = new Headers();
 headers.append("Content-Type", "application/json");
-headers.append("Access-Control-Allow-Origin", "*");
-headers.append("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,PATCH,OPTIONS")
 
 /**
  * Fetch `json` from the specified URL and handle error status codes and ignore `AbortError`s

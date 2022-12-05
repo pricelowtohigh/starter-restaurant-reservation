@@ -32,7 +32,7 @@ export default function EditReservation() {
         console.log(errors)
       })
     return () => abortController.abort();
-  }, [URL, reservation_id, errors]);
+  }, [URL, reservation_id]);
 
   return (
     <div>
