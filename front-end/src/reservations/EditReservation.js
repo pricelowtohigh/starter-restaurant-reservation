@@ -13,6 +13,7 @@ export default function EditReservation() {
 
   useEffect(() => {
     const abortController = new AbortController();
+    console.log("edit reservation")
     axios
       .get(`${URL}/reservations/${reservation_id}`, {
         signal: abortController.signal,
@@ -32,7 +33,7 @@ export default function EditReservation() {
         console.log(errors)
       })
     return () => abortController.abort();
-  }, [URL, reservation_id]);
+  }, [URL, reservation_id, errors]);
 
   return (
     <div>
