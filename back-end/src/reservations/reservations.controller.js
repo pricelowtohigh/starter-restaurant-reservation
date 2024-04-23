@@ -181,6 +181,7 @@ async function updateReservation(req, res) {
     reservationId,
     updatedReservation
   );
+  //console.log("update reservation responseData: " + responseData)
   res.status(200).json({ data: responseData });
 }
 

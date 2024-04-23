@@ -13,9 +13,14 @@ export default function EditReservation() {
 
   useEffect(() => {
     const abortController = new AbortController();
+    console.log("edit reservation")
     axios
       .get(`${URL}/reservations/${reservation_id}`, {
         signal: abortController.signal,
+      })
+      .then((res) => {
+        console.log(res);
+        return res;
       })
       .then((response) =>
         setExistingReservation({
@@ -23,9 +28,12 @@ export default function EditReservation() {
           reservation_date: formatAsDate(response.data.data.reservation_date),
         })
       )
-      .catch(setErrors);
+      .catch(setErrors)
+      .then(() => {
+        console.log(errors)
+      })
     return () => abortController.abort();
-  }, [URL, reservation_id]);
+  }, [URL, reservation_id, errors]);
 
   return (
     <div>

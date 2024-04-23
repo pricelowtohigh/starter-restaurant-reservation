@@ -35,8 +35,10 @@ export default function TableForm() {
       await axios.post(process.env.REACT_APP_API_BASE_URL + `/tables`, {
         data: formData,
       });
+      console.log("Try axios.post @ " + process.env.REACT_APP_API_BASE_URL);
       history.push(`/dashboard`);
     } catch (error) {
+      console.log("Table form error.")
       setErrors(error.response.data.error);
     }
   };
